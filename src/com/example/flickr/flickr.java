@@ -82,8 +82,7 @@ public class flickr extends Activity implements Runnable {
 					dialog.cancel();
 				}
 			});
-		AlertDialog alert = builder.create();
-		alert.show();
+		builder.create().show();
 	}
 
 	public void showQuitDialog() {
@@ -100,8 +99,7 @@ public class flickr extends Activity implements Runnable {
 					dialog.cancel();
 				}
 			});
-		AlertDialog alert = builder.create();
-		alert.show();
+		builder.create().show();
 	}
 
 	private void search() {
