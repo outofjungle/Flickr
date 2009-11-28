@@ -107,7 +107,7 @@ public class flickr extends Activity implements Runnable {
 	private void search() {
 		imageAdapter = new FlickrAdapter(this);
 
-		waitDialog = ProgressDialog.show(this, "", "Searching..", true, false);
+		waitDialog = ProgressDialog.show(this, "", "Searching...", true, false);
 		Thread thread = new Thread(this);
 		thread.start();
 	}
