@@ -13,7 +13,6 @@ import android.widget.ImageView;
 public class FlickrAdapter extends BaseAdapter {
 	private Context mContext;
 
-	// private ArrayList<Drawable> photos = new ArrayList<Drawable>();
 	private ArrayList<Drawable> photos = new ArrayList<Drawable>();
 
 	public FlickrAdapter(Context c) {
