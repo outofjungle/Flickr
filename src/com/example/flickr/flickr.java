@@ -19,10 +19,15 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class flickr extends Activity implements Runnable {
 
@@ -30,9 +35,6 @@ public class flickr extends Activity implements Runnable {
 	private ProgressDialog waitDialog;
 
 	private String tags = "cute, kitty";
-
-	static final int MENU_SEARCH = 0;
-	static final int MENU_QUIT = 1;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -44,17 +46,17 @@ public class flickr extends Activity implements Runnable {
 	}
 
 	public boolean onCreateOptionsMenu(Menu menu) {
-		menu.add(0, MENU_SEARCH, 0, "Search");
-		menu.add(0, MENU_QUIT, 0, "Quit");
-		return true;
+	    MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.menu.options_menu, menu);
+	    return true;
 	}
 
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case MENU_SEARCH:
+		case R.id.search:
 			showSearchDialog();
 			return true;
-		case MENU_QUIT:
+		case R.id.quit:
 			showQuitDialog();
 			return true;
 		default:
@@ -122,7 +124,7 @@ public class flickr extends Activity implements Runnable {
 	public void run() {
 		try {
 
-			String url = "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20flickr.photos.search(21)%20where%20tags%3D'"
+			String url = "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20flickr.photos.search(24)%20where%20tags%3D'"
 					+ URLEncoder.encode(tags, "UTF-8")
 					+ "'%20and%20tag_mode%3D'all'&format=xml&diagnostics=false";
 
@@ -142,12 +144,20 @@ public class flickr extends Activity implements Runnable {
 		handler.sendEmptyMessage(0);
 	}
 
+	private OnItemClickListener clickedHandler = new OnItemClickListener() {
+		public void onItemClick(AdapterView<?> parent, View v, int position,
+				long id) {
+			Log.i("FLICKR", position + "");
+		}
+	};
+
 	private Handler handler = new Handler() {
 
 		@Override
 		public void handleMessage(Message msg) {
 			GridView gridview = (GridView) findViewById(R.id.gridview);
 			gridview.setAdapter(imageAdapter);
+			gridview.setOnItemClickListener(clickedHandler);
 
 			waitDialog.dismiss();
 		}
