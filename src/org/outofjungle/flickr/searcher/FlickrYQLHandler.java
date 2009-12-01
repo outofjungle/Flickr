@@ -1,4 +1,4 @@
-package org.outofjungle.flickr;
+package org.outofjungle.flickr.searcher;
 import java.util.ArrayList;
 
 import org.xml.sax.Attributes;

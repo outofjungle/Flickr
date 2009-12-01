@@ -1,4 +1,4 @@
-package org.outofjungle.flickr;
+package org.outofjungle.flickr.searcher;
 
 import android.graphics.drawable.Drawable;
 
