@@ -1,4 +1,4 @@
-package com.example.flickr;
+package org.outofjungle.flickr;
 
 import java.util.ArrayList;
 

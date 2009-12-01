@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package com.example.flickr;
+package org.outofjungle.flickr;
 
 public final class R {
     public static final class attr {

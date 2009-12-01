@@ -1,7 +1,9 @@
-package com.example.flickr;
+package org.outofjungle.flickr;
 
 import java.io.InputStream;
 import java.net.URL;
+
+import org.outofjungle.flickr.R;
 
 import android.app.Activity;
 import android.graphics.drawable.Drawable;

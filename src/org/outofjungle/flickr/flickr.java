@@ -1,4 +1,4 @@
-package com.example.flickr;
+package org.outofjungle.flickr;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,6 +10,8 @@ import java.util.Iterator;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+
+import org.outofjungle.flickr.R;
 
 import android.app.Activity;
 import android.app.AlertDialog;
