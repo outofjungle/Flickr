@@ -3,7 +3,6 @@ package com.example.flickr;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -13,7 +12,7 @@ import android.widget.ImageView;
 public class FlickrAdapter extends BaseAdapter {
 	private Context mContext;
 
-	private ArrayList<Drawable> photos = new ArrayList<Drawable>();
+	private ArrayList<FlickrRecord> photos = new ArrayList<FlickrRecord>();
 
 	public FlickrAdapter(Context c) {
 		mContext = c;
@@ -45,7 +44,7 @@ public class FlickrAdapter extends BaseAdapter {
 		}
 
 		try {
-			imageView.setImageDrawable(photos.get(position));
+			imageView.setImageDrawable(photos.get(position).getDrawable());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -53,7 +52,11 @@ public class FlickrAdapter extends BaseAdapter {
 		return imageView;
 	}
 
-	public void addPhoto(Drawable photo) {
+	public void addPhoto(FlickrRecord photo) {
 		this.photos.add(photo);
+	}
+	
+	public FlickrRecord get(int position) {
+		return photos.get(position);
 	}
 }

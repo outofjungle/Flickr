@@ -13,12 +13,10 @@ import javax.xml.parsers.SAXParserFactory;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -29,10 +27,9 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class flickr extends Activity implements Runnable {
+public class flickr extends Activity {
 
 	private FlickrAdapter imageAdapter;
-	private ProgressDialog waitDialog;
 
 	private String tags = "cute, kitty";
 
@@ -107,9 +104,12 @@ public class flickr extends Activity implements Runnable {
 	private void search() {
 		imageAdapter = new FlickrAdapter(this);
 
-		waitDialog = ProgressDialog.show(this, "", "Searching...", true, false);
-		Thread thread = new Thread(this);
-		thread.start();
+		this.run();
+
+		GridView gridview = (GridView) findViewById(R.id.gridview);
+		gridview.setAdapter(imageAdapter);
+		gridview.setOnItemClickListener(clickedHandler);
+
 	}
 
 	private Drawable fetchDrawable(String url) throws MalformedURLException,
@@ -136,30 +136,21 @@ public class flickr extends Activity implements Runnable {
 			ArrayList<FlickrRecord> photos = flickrHandler.getPhotos();
 			for (Iterator<FlickrRecord> itr = photos.iterator(); itr.hasNext();) {
 				FlickrRecord photo = itr.next();
-				imageAdapter.addPhoto(fetchDrawable(photo.getThumbsUrl()));
+				photo.setDrawable(fetchDrawable(photo.getThumbsUrl()));
+				imageAdapter.addPhoto(photo);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		handler.sendEmptyMessage(0);
 	}
 
 	private OnItemClickListener clickedHandler = new OnItemClickListener() {
 		public void onItemClick(AdapterView<?> parent, View v, int position,
 				long id) {
-			Log.i("FLICKR", position + "");
-		}
-	};
-
-	private Handler handler = new Handler() {
-
-		@Override
-		public void handleMessage(Message msg) {
-			GridView gridview = (GridView) findViewById(R.id.gridview);
-			gridview.setAdapter(imageAdapter);
-			gridview.setOnItemClickListener(clickedHandler);
-
-			waitDialog.dismiss();
+			Log.i("FLICKR", imageAdapter.get(position).getImageUrl());
+			Intent intent = new Intent(flickr.this, PhotoViewer.class);
+			intent.putExtra(PhotoViewer.PHOTO_URL, imageAdapter.get(position).getImageUrl());
+			startActivity(intent);
 		}
 	};
 }

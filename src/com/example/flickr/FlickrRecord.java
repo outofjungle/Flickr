@@ -1,5 +1,7 @@
 package com.example.flickr;
 
+import android.graphics.drawable.Drawable;
+
 public class FlickrRecord {
 	private String farm;
 	private String id;
@@ -7,6 +9,7 @@ public class FlickrRecord {
 	private String secret;
 	private String server;
 	private String title;
+	private Drawable drawable;
 
 	public FlickrRecord(String farm, String id, String owner, String secret,
 			String server, String title) {
@@ -35,6 +38,19 @@ public class FlickrRecord {
 	public String getThumbsUrl() {
 		return "http://farm" + farm + ".static.flickr.com/" + server + "/" + id
 				+ "_" + secret + "_s.jpg";
+	}
+
+	public String getImageUrl() {
+		return "http://farm" + farm + ".static.flickr.com/" + server + "/" + id
+				+ "_" + secret + "_b.jpg";
+	}
+
+	public void setDrawable(Drawable drawable) {
+		this.drawable = drawable;
+	}
+
+	public Drawable getDrawable() {
+		return drawable;
 	}
 
 }
