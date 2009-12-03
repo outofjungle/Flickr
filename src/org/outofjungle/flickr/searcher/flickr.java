@@ -116,7 +116,7 @@ public class flickr extends Activity {
 
 	private Drawable fetchDrawable(String url) throws MalformedURLException,
 			IOException {
-
+		Log.i("FLICKR", url);
 		URL resource = new URL(url);
 		InputStream istream = (InputStream) resource.getContent();
 		Drawable photo = Drawable.createFromStream(istream, "src");
@@ -126,7 +126,7 @@ public class flickr extends Activity {
 	public void run() {
 		try {
 
-			String url = "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20flickr.photos.search(24)%20where%20tags%3D'"
+			String url = "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20flickr.photos.search(18)%20where%20tags%3D'"
 					+ URLEncoder.encode(tags, "UTF-8")
 					+ "'%20and%20tag_mode%3D'all'&format=xml&diagnostics=false";
 

@@ -42,7 +42,7 @@ public class FlickrRecord {
 
 	public String getImageUrl() {
 		return "http://farm" + farm + ".static.flickr.com/" + server + "/" + id
-				+ "_" + secret + "_b.jpg";
+				+ "_" + secret + ".jpg";
 	}
 
 	public void setDrawable(Drawable drawable) {
